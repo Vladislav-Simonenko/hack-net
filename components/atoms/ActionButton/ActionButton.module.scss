@@ -1,0 +1,26 @@
+@import "assets/mixin/mixin.scss";
+@import "app/main.scss";
+@import "assets/variables/variables.scss";
+
+.actionButtonContainer {
+  @include format-text(
+    $RobotoLight,
+    24px,
+    600,
+    $mainYellowColor,
+    150%,
+    left,
+    1px
+  );
+  padding: 12px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: gray;
+  }
+}

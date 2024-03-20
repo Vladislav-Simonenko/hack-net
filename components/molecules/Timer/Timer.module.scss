@@ -1,0 +1,27 @@
+@import "assets/variables/variables.scss";
+@import "app/main.scss";
+@import "assets/mixin/mixin.scss";
+
+.timerContainer {
+  border: 1px solid $mainYellowColor;
+  padding: 4px 12px;
+  min-width: 64px;
+  color: $mainYellowColor;
+  @include format-text(
+    $RobotoLight,
+    24px,
+    600,
+    $mainYellowColor,
+    150%,
+    left,
+    1px
+  );
+}
+
+.completionist {
+  color: red;
+}
+
+.fontVariant {
+  font-variant-numeric: tabular-nums;
+}

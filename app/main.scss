@@ -1,0 +1,32 @@
+$RobotoBold: "Roboto-Bold";
+$RobotoLight: "Roboto-Light";
+$RobotoMedium: "Roboto-Medium";
+$RobotoRegular: "Roboto-Regular";
+
+@font-face {
+  font-family: "Roboto-Bold";
+  font-display: block;
+  src: local("Roboto-Bold"),
+    url("../public/fonts/roboto/Roboto-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto-Light";
+  font-display: block;
+  src: local("Roboto-Light"),
+    url("../public/fonts/roboto/Roboto-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto-Medium";
+  font-display: block;
+  src: local("Roboto-Medium"),
+    url("../public/fonts/roboto/Roboto-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto-Regular";
+  font-display: block;
+  src: local("Roboto-Regular"),
+    url("../public/fonts/roboto/Roboto-Regular.ttf") format("truetype");
+}

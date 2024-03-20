@@ -1,0 +1,199 @@
+@import "assets/mixin/mixin.scss";
+@import "app/main.scss";
+@import "assets/variables/variables.scss";
+
+.hackContainer {
+  @include flex-container(row, flex-start, flex-start);
+  width: 100%;
+  gap: 32px;
+
+  .lestSideHackContainer {
+    flex: 0 0 50%;
+
+    .leftSideHackTimer {
+      @include flex-container(row, space-between, flex-start);
+      padding: 8px 0 12px 0;
+      border-top: 1px solid $mainYellowColor;
+      border-bottom: 8px solid $mainYellowColor;
+
+      .leftSideHackText {
+        @include format-text(
+          $RobotoLight,
+          24px,
+          600,
+          $mainYellowColor,
+          150%,
+          left,
+          1px
+        );
+        text-transform: uppercase;
+      }
+    }
+
+    .leftSideHackMatrix {
+      margin-top: 40px;
+
+      .leftSideHackMatrixHeader {
+        @include gradient($firthGradientColor, $secondGradientColor);
+        @include flex-container(row, flex-start, flex-start);
+        gap: 8px;
+        padding: 12px 8px;
+        border-top-left-radius: 12px;
+
+        .headerMatrixImage {
+          width: 20px;
+          height: 20px;
+          object-fit: cover;
+        }
+
+        .headerMatrixText {
+          @include format-text(
+            $RobotoLight,
+            16px,
+            600,
+            $secondTextColor,
+            150%,
+            left,
+            1px
+          );
+          text-transform: uppercase;
+        }
+      }
+
+      .leftSideHackMatrixMain {
+        border: 1px solid $firthGradientColor;
+        @include flex-container(column, center, center);
+
+        .matrixRow {
+          @include flex-container(row, center, center);
+          gap: 20px;
+
+          .matrixCell {
+            text-align: center;
+            min-width: 60px;
+            min-height: 60px;
+          }
+        }
+      }
+    }
+  }
+
+  .rightSideHackContainer {
+    flex: 0 0 50%;
+
+    .rightSideHackBuffer {
+      padding: 8px 0 12px 0;
+      border-top: 1px solid $mainYellowColor;
+      border-bottom: 1px solid $mainYellowColor;
+
+      .currentBuffer {
+        @include flex-container(row, flex-start, flex-start);
+        gap: 20px;
+        padding: 12px;
+        border: 1px solid $mainYellowColor;
+        width: fit-content;
+
+        .currentBufferValue {
+          @include format-text(
+            $RobotoLight,
+            16px,
+            600,
+            $white,
+            150%,
+            left,
+            1px
+          );
+          text-transform: uppercase;
+          border: 1px dashed $mainYellowColor;
+          padding: 0 8px;
+          text-align: center;
+        }
+      }
+    }
+
+    .rightSideHackSequence {
+      @include flex-container(row, flex-start, flex-start);
+      margin-top: 40px;
+      border: 1px solid $secondYellowColor;
+      gap: 8px;
+      padding: 12px 8px;
+      border-top-left-radius: 12px;
+
+      .sequenceHeader {
+        @include flex-container(row, center, center);
+        gap: 8px;
+
+        .sequenceHeaderImage {
+          width: 20px;
+          height: 20px;
+          object-fit: cover;
+        }
+
+        .sequenceHeaderText {
+          @include format-text(
+            $RobotoLight,
+            16px,
+            400,
+            $mainYellowColor,
+            150%,
+            left,
+            1px
+          );
+          font-family: sans-serif;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .sequenceMatrix {
+      @include flex-container(row, flex-start, center);
+      gap: 8px;
+      border: 1px solid $secondYellowColor;
+      padding: 8px;
+
+      .sequenceValue {
+        @include format-text($RobotoBold, 16px, 400, $white, 150%, left, 1px);
+        text-transform: uppercase;
+        font-family: sans-serif;
+      }
+
+      .sequenceInfo {
+        @include flex-container(row, center, center);
+        @include format-text($RobotoLight, 16px, 600, $white, 150%, left, 1px);
+        gap: 8px;
+        text-transform: capitalize;
+      }
+
+      .sequenceImage {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+      }
+
+      :last-child {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.unblockedRow {
+  background-color: rgba(211, 211, 211, 0.1);
+}
+
+.unblockedColumn {
+  background-color: rgba(211, 211, 211, 0.1);
+}
+
+.greenText {
+  color: green !important;
+}
+
+@media (max-width: 768px) {
+  .hackContainer {
+    @include flex-container(column, center, center);
+  }
+  .rightSideHackBuffer {
+    @include flex-container(row, center, center);
+  }
+}

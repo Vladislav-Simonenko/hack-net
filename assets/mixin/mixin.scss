@@ -1,0 +1,234 @@
+$ui-index-1: 1; /*for default components*/
+$ui-index-2: 2; /*for default components over component 1*/
+$ui-index-3: 3; /*for mask*/
+$ui-index-4: 4; /*for sidebar*/
+$ui-index-5: 5; /*for modal*/
+$ui-index-6: 6; /*for overlapping ALL*/
+
+//Cross-browser for prefix
+@mixin prefix($property, $value) {
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -ms-#{$property}: $value;
+  -o-#{$property}: $value;
+  #{$property}: $value;
+}
+
+//Gradient
+@mixin gradient($colors...) {
+  background: linear-gradient(145deg, $colors);
+}
+
+//Animation
+@mixin animation($name, $duration, $timing-function, $delay, $iteration-count) {
+  animation: $name $duration $timing-function $delay $iteration-count;
+}
+
+//Shadows
+@mixin box-shadow($x, $y, $blur, $spread, $color) {
+  box-shadow: $x $y $blur $spread $color;
+}
+
+//Adaptive fonts
+@mixin responsive-font(
+  $min-font-size,
+  $max-font-size,
+  $min-screen-size,
+  $max-screen-size
+) {
+  font-size: $min-font-size;
+  @media (min-width: $min-screen-size) {
+    font-size: calc(
+      #{$min-font-size} + #{$max-font-size - $min-font-size} *
+        ((100vw - #{$min-screen-size}) / #{$max-screen-size - $min-screen-size})
+    );
+  }
+  @media (min-width: $max-screen-size) {
+    font-size: $max-font-size;
+  }
+}
+
+//Flexbox-container
+@mixin flex-container($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+//Flex-item
+@mixin flex-item($flex: 1) {
+  flex: $flex;
+}
+
+//Grid-container
+@mixin grid-container(
+  $columns: 3,
+  $rows: 3,
+  $content,
+  $item,
+  $alignItem,
+  $justifyItem,
+  $gap: 20px
+) {
+  display: grid;
+  justify-content: $content;
+  align-content: $item;
+  align-items: $alignItem;
+  justify-items: $justifyItem;
+  grid-template-rows: repeat($rows, 1fr);
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+//Grid-item
+@mixin grid-item($row: auto, $col: auto) {
+  grid-row: $row;
+  grid-column: $col;
+}
+
+//Card with width and height
+@mixin custom-card(
+  $width,
+  $height,
+  $background: #f9fafb,
+  $border: 1px solid #e5eeff,
+  $padding: $padding
+) {
+  width: $width;
+  height: $height;
+  background: $background;
+  border: $border;
+  padding: $padding;
+}
+
+//Border
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+
+//Text-shadows
+@mixin text-shadow($x, $y, $blur, $color) {
+  text-shadow: $x $y $blur $color;
+}
+
+//Animation / keyframes
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+//Aligment items
+@mixin center($axis: both) {
+  @if $axis == both {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } @else if $axis == horizontal {
+    display: flex;
+    justify-content: center;
+  } @else if $axis == vertical {
+    display: flex;
+    align-items: center;
+  }
+}
+
+//Text-formatter
+@mixin format-text(
+  $font-family,
+  $font-size,
+  $font-weight,
+  $text-color,
+  $line-height,
+  $text-align,
+  $letter-spacing
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $text-color;
+  line-height: $line-height;
+  text-align: $text-align;
+  letter-spacing: $letter-spacing;
+}
+
+//Auto-margin
+$ui-step: 1rem;
+
+@mixin ui-space($direction, $size) {
+  @if unitless($size) {
+    @warn "Please provide a unit for the size argument. Using 'rem' as the default unit.";
+    $size: $size * 1rem;
+  }
+
+  @if $direction == top {
+    margin-top: $size;
+  } @else if $direction == bottom {
+    margin-bottom: $size;
+  } @else if $direction == left {
+    margin-left: $size;
+  } @else if $direction == right {
+    margin-right: $size;
+  } @else {
+    @warn "Invalid direction provided. Use 'top', 'bottom', 'left', or 'right'.";
+  }
+}
+
+//Create-buttons
+@mixin button($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($bg-color, 5%);
+  }
+}
+
+//Modal center
+@mixin center-element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//Round-images
+@mixin round-image($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+//Links
+@mixin link-styles($link-color, $hover-color) {
+  color: $link-color;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+//Rounded items
+@mixin rounded-border($radius, $color) {
+  border: 1px solid $color;
+  border-radius: $radius;
+}
+
+//Rotate Animation
+@mixin rotate-animation($duration: 1s) {
+  animation: rotate $duration infinite linear;
+  @include keyframes(rotate) {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
