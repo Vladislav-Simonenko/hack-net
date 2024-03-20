@@ -1,13 +1,17 @@
 "use client";
-
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Countdown, { CountdownRenderProps } from "react-countdown";
 import { HackedModal } from "@/components";
 
 import styles from "./Timer.module.scss";
 import classNames from "classnames";
 
-export const Timer: FC = () => {
+interface ITimerProps {
+  endDate: number;
+}
+
+export const Timer: FC<ITimerProps> = (props) => {
+  const { endDate } = props;
   const Completionist = () => <HackedModal />;
 
   const renderer = ({
@@ -25,14 +29,13 @@ export const Timer: FC = () => {
       );
     }
   };
+
   return (
     <Countdown
       intervalDelay={1}
       precision={2}
       renderer={renderer}
-      date={Date.now() + 60000}
-    >
-      <Completionist />
-    </Countdown>
+      date={endDate}
+    />
   );
 };

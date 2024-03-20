@@ -88,7 +88,7 @@
 
       .currentBuffer {
         @include flex-container(row, flex-start, flex-start);
-        gap: 20px;
+        gap: 8px;
         padding: 12px;
         border: 1px solid $mainYellowColor;
         width: fit-content;

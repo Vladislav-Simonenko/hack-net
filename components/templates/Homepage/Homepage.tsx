@@ -108,12 +108,7 @@ export const Homepage: FC = () => {
 
     return () => clearInterval(interval);
   }, [seconds]);
-
-  const isValueInSequence = (value: any, sequences: any[]) => {
-    return sequences.some((sequence: string | any[]) =>
-      sequence.includes(value)
-    );
-  };
+  const [endDate] = useState(Date.now() + 60000);
 
   return (
     <React.Fragment>
@@ -122,7 +117,7 @@ export const Homepage: FC = () => {
           <div className={styles.lestSideHackContainer}>
             <div className={styles.leftSideHackTimer}>
               <p className={styles.leftSideHackText}>Breach time remaining</p>
-              <Timer />
+              <Timer endDate={endDate} />
             </div>
             <div className={styles.leftSideHackMatrix}>
               <div className={styles.leftSideHackMatrixHeader}>
