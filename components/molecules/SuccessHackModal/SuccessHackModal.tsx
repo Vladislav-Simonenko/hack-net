@@ -20,7 +20,7 @@ export const SuccessHackModal: FC<ISuccessHackModal> = (props) => {
           </p>
           <div className={styles.hackModalTypes}>
             {matchedSequences.map((item) => {
-              return <p>{item.message}</p>;
+              return <p key={item.message}>{item.message}</p>;
             })}
           </div>
         </div>
