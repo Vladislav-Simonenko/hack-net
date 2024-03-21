@@ -229,40 +229,43 @@ export const Homepage: FC = () => {
                 />
                 <p className={styles.headerMatrixText}>Code matrix</p>
               </div>
-              <div className={styles.leftSideHackMatrixMain}>
-                {createMatrix.map((row, rowIndex) => (
-                  <tr
-                    key={rowIndex}
-                    className={classNames(
-                      styles.matrixRow,
-                      !isRowBlocked(rowIndex) ? styles.unblockedRow : ""
-                    )}
-                  >
-                    {row.map((cell, colIndex) => (
-                      <td
-                        key={colIndex}
-                        className={classNames(
-                          styles.matrixCell,
-                          !isColumnBlocked(colIndex)
-                            ? styles.unblockedColumn
-                            : ""
-                        )}
-                      >
-                        <ActionButton
-                          onClick={() => {
-                            addBufferValue(cell);
-                            blockRowAndUnblockColumn(rowIndex, colIndex);
-                          }}
-                          text={cell}
-                          disabled={
-                            isRowBlocked(rowIndex) && isColumnBlocked(colIndex)
-                          }
-                        />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </div>
+              <table className={styles.leftSideHackMatrixMain}>
+                <tbody>
+                  {createMatrix.map((row, rowIndex) => (
+                    <tr
+                      key={rowIndex}
+                      className={classNames(
+                        styles.matrixRow,
+                        !isRowBlocked(rowIndex) ? styles.unblockedRow : ""
+                      )}
+                    >
+                      {row.map((cell, colIndex) => (
+                        <td
+                          key={colIndex}
+                          className={classNames(
+                            styles.matrixCell,
+                            !isColumnBlocked(colIndex)
+                              ? styles.unblockedColumn
+                              : ""
+                          )}
+                        >
+                          <ActionButton
+                            onClick={() => {
+                              addBufferValue(cell);
+                              blockRowAndUnblockColumn(rowIndex, colIndex);
+                            }}
+                            text={cell}
+                            disabled={
+                              isRowBlocked(rowIndex) &&
+                              isColumnBlocked(colIndex)
+                            }
+                          />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
           <div className={styles.rightSideHackContainer}>
