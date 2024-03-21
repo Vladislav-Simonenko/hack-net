@@ -134,7 +134,7 @@ export const Homepage: FC = () => {
     const newMatchedSequences = [];
     if (sequence2.every((value) => buffer.includes(value))) {
       newMatchedSequences.push({
-        message: "Success Authorization",
+        message: "successful authorization",
         type: true,
         sequence: sequence2,
         img: (
@@ -150,7 +150,7 @@ export const Homepage: FC = () => {
     }
     if (sequence3.every((value) => buffer.includes(value))) {
       newMatchedSequences.push({
-        message: "Full Netw0rk Access",
+        message: "Full Network Access",
         type: true,
         sequence: sequence3,
         img: (
@@ -184,7 +184,7 @@ export const Homepage: FC = () => {
 
     if (sequence5.every((value) => buffer.includes(value))) {
       newMatchedSequences.push({
-        message: "R00t Access Granted",
+        message: "Root Access Granted",
         type: true,
         sequence: sequence5,
         img: (
@@ -358,7 +358,7 @@ export const Homepage: FC = () => {
                   alt=""
                   src={"./svg/loadDemon.svg"}
                 />
-                <p className={styles.sequenceText}>launch the daemon</p>
+                <p className={styles.sequenceText}>launching the daemon</p>
               </div>
             </div>
             <div className={styles.sequenceMatrix}>
@@ -381,7 +381,7 @@ export const Homepage: FC = () => {
                   alt=""
                   src={"./svg/rootAcess.svg"}
                 />
-                <p className={styles.sequenceText}>ROOT ACCESS</p>
+                <p className={styles.sequenceText}>root access</p>
               </div>
             </div>
           </div>
