@@ -1,6 +1,11 @@
 "use client";
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { ActionButton, Timer, VideoLoader } from "@/components";
+import {
+  ActionButton,
+  SuccessHackModal,
+  Timer,
+  VideoLoader,
+} from "@/components";
 import Image from "next/image";
 
 import styles from "./Homepage.module.scss";
@@ -92,10 +97,10 @@ export const Homepage: FC = () => {
   }, []);
   const sequence2 = useMemo(() => getSequence(createMatrix, 2), [createMatrix]);
   const sequence3 = useMemo(() => getSequence(createMatrix, 3), [createMatrix]);
-  const sequence4 = useMemo(() => getSequence(createMatrix, 4), [createMatrix]);
-  const sequence5 = useMemo(() => getSequence(createMatrix, 5), [createMatrix]);
+  const sequence4 = useMemo(() => getSequence(createMatrix, 5), [createMatrix]);
+  const sequence5 = useMemo(() => getSequence(createMatrix, 6), [createMatrix]);
 
-  const [seconds, setSeconds] = useState(1);
+  const [seconds, setSeconds] = useState(8);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -108,186 +113,225 @@ export const Homepage: FC = () => {
 
     return () => clearInterval(interval);
   }, [seconds]);
-  const [endDate] = useState(Date.now() + 60000);
+
+  const [endDate] = useState(Date.now() + 9000000);
+
+  const [matchedSequences, setMatchedSequences] = useState<
+    { message: string; sequence: string[] }[]
+  >([]);
+
+  useEffect(() => {
+    const newMatchedSequences = [];
+    if (sequence2.every((value) => buffer.includes(value))) {
+      newMatchedSequences.push({
+        message: "Success Authorization",
+        type: true,
+        sequence: sequence2,
+      });
+    }
+    if (sequence3.every((value) => buffer.includes(value))) {
+      newMatchedSequences.push({
+        message: "Full Netw0rk Access",
+        type: true,
+        sequence: sequence3,
+      });
+    }
+
+    if (sequence4.every((value) => buffer.includes(value))) {
+      newMatchedSequences.push({
+        message: "Daemon Success Launched",
+        type: true,
+        sequence: sequence4,
+      });
+    }
+
+    if (sequence5.every((value) => buffer.includes(value))) {
+      newMatchedSequences.push({
+        message: "R00t Access Granted",
+        type: true,
+        sequence: sequence5,
+      });
+    }
+
+    setMatchedSequences(newMatchedSequences);
+  }, [buffer, sequence2, sequence3, sequence4, sequence5]);
 
   return (
     <React.Fragment>
-      {seconds === 0 ? (
-        <div className={styles.hackContainer}>
-          <div className={styles.lestSideHackContainer}>
-            <div className={styles.leftSideHackTimer}>
-              <p className={styles.leftSideHackText}>Breach time remaining</p>
-              <Timer endDate={endDate} />
-            </div>
-            <div className={styles.leftSideHackMatrix}>
-              <div className={styles.leftSideHackMatrixHeader}>
-                <Image
-                  alt=""
-                  className={styles.headerMatrixImage}
-                  src={"./svg/matrixLogo.svg"}
-                  width={20}
-                  height={20}
-                />
-                <p className={styles.headerMatrixText}>Code matrix</p>
-              </div>
-              <div className={styles.leftSideHackMatrixMain}>
-                {createMatrix.map((row, rowIndex) => (
-                  <tr
-                    key={rowIndex}
-                    className={classNames(
-                      styles.matrixRow,
-                      !isRowBlocked(rowIndex) ? styles.unblockedRow : ""
-                    )}
-                  >
-                    {row.map((cell, colIndex) => (
-                      <td
-                        key={colIndex}
-                        className={classNames(
-                          styles.matrixCell,
-                          !isColumnBlocked(colIndex)
-                            ? styles.unblockedColumn
-                            : ""
-                        )}
-                      >
-                        <ActionButton
-                          onClick={() => {
-                            addBufferValue(cell);
-                            blockRowAndUnblockColumn(rowIndex, colIndex);
-                          }}
-                          text={cell}
-                          disabled={
-                            isRowBlocked(rowIndex) && isColumnBlocked(colIndex)
-                          }
-                        />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </div>
-            </div>
+      <div className={styles.hackContainer}>
+        <div className={styles.lestSideHackContainer}>
+          <div className={styles.leftSideHackTimer}>
+            <p className={styles.leftSideHackText}>Breach time remaining</p>
+            <Timer endDate={endDate} />
           </div>
-          <div className={styles.rightSideHackContainer}>
-            <div className={styles.rightSideHackBuffer}>
-              <div className={styles.currentBuffer}>
-                {buffer.map((value, index) => (
-                  <span className={styles.currentBufferValue} key={index}>
-                    {value !== "" ? value : "-"}
-                  </span>
-                ))}
-              </div>
+          <div className={styles.leftSideHackMatrix}>
+            <div className={styles.leftSideHackMatrixHeader}>
+              <Image
+                alt=""
+                className={styles.headerMatrixImage}
+                src={"./svg/matrixLogo.svg"}
+                width={20}
+                height={20}
+              />
+              <p className={styles.headerMatrixText}>Code matrix</p>
             </div>
-
-            <div className={styles.rightSideHackSequence}>
-              <div className={styles.sequenceHeader}>
-                <Image
-                  src={"./svg/sequence.svg"}
-                  width={20}
-                  height={20}
-                  alt=""
-                  className={styles.sequenceHeaderImage}
-                />
-                <p className={styles.sequenceHeaderText}>
-                  sequence required to upload
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.sequenceMatrix}>
-              {sequence2.map((value, index) => (
-                <p
-                  key={index}
+            <div className={styles.leftSideHackMatrixMain}>
+              {createMatrix.map((row, rowIndex) => (
+                <tr
+                  key={rowIndex}
                   className={classNames(
-                    styles.sequenceValue,
-                    buffer.includes(value) && styles.greenText
+                    styles.matrixRow,
+                    !isRowBlocked(rowIndex) ? styles.unblockedRow : ""
                   )}
                 >
-                  {value}
-                </p>
+                  {row.map((cell, colIndex) => (
+                    <td
+                      key={colIndex}
+                      className={classNames(
+                        styles.matrixCell,
+                        !isColumnBlocked(colIndex) ? styles.unblockedColumn : ""
+                      )}
+                    >
+                      <ActionButton
+                        onClick={() => {
+                          addBufferValue(cell);
+                          blockRowAndUnblockColumn(rowIndex, colIndex);
+                        }}
+                        text={cell}
+                        disabled={
+                          isRowBlocked(rowIndex) && isColumnBlocked(colIndex)
+                        }
+                      />
+                    </td>
+                  ))}
+                </tr>
               ))}
-              <div className={styles.sequenceInfo}>
-                <Image
-                  className={styles.sequenceImage}
-                  width={20}
-                  height={20}
-                  alt=""
-                  src={"./svg/doorHack.svg"}
-                />
-                <p>user authorization</p>
-              </div>
-            </div>
-            <div className={styles.sequenceMatrix}>
-              {sequence3.map((value, index) => (
-                <p
-                  key={index}
-                  className={classNames(
-                    styles.sequenceValue,
-                    buffer.includes(value) && styles.greenText
-                  )}
-                >
-                  {value}
-                </p>
-              ))}
-              <div className={styles.sequenceInfo}>
-                <Image
-                  className={styles.sequenceImage}
-                  width={20}
-                  height={20}
-                  alt=""
-                  src={"./svg/netHack.svg"}
-                />
-                <p>network access</p>
-              </div>
-            </div>
-            <div className={styles.sequenceMatrix}>
-              {sequence4.map((value, index) => (
-                <p
-                  key={index}
-                  className={classNames(
-                    styles.sequenceValue,
-                    buffer.includes(value) && styles.greenText
-                  )}
-                >
-                  {value}
-                </p>
-              ))}
-              <div className={styles.sequenceInfo}>
-                <Image
-                  className={styles.sequenceImage}
-                  width={20}
-                  height={20}
-                  alt=""
-                  src={"./svg/loadDemon.svg"}
-                />
-                <p>launch the daemon</p>
-              </div>
-            </div>
-            <div className={styles.sequenceMatrix}>
-              {sequence5.map((value, index) => (
-                <p
-                  key={index}
-                  className={classNames(
-                    styles.sequenceValue,
-                    buffer.includes(value) && styles.greenText
-                  )}
-                >
-                  {value}
-                </p>
-              ))}
-              <div className={styles.sequenceInfo}>
-                <Image
-                  className={styles.sequenceImage}
-                  width={20}
-                  height={20}
-                  alt=""
-                  src={"./svg/rootAcess.svg"}
-                />
-                <p>ROOT ACCESS</p>
-              </div>
             </div>
           </div>
         </div>
-      ) : (
-        <VideoLoader />
+        <div className={styles.rightSideHackContainer}>
+          <div className={styles.rightSideHackBuffer}>
+            <div className={styles.currentBuffer}>
+              {buffer.map((value, index) => (
+                <span className={styles.currentBufferValue} key={index}>
+                  {value !== "" ? value : "-"}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.rightSideHackSequence}>
+            <div className={styles.sequenceHeader}>
+              <Image
+                src={"./svg/sequence.svg"}
+                width={20}
+                height={20}
+                alt=""
+                className={styles.sequenceHeaderImage}
+              />
+              <p className={styles.sequenceHeaderText}>
+                sequence required to upload
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.sequenceMatrix}>
+            {sequence2.map((value, index) => (
+              <p
+                key={index}
+                className={classNames(
+                  styles.sequenceValue,
+                  buffer.includes(value) && styles.greenText
+                )}
+              >
+                {value}
+              </p>
+            ))}
+            <div className={styles.sequenceInfo}>
+              <Image
+                className={styles.sequenceImage}
+                width={20}
+                height={20}
+                alt=""
+                src={"./svg/doorHack.svg"}
+              />
+              <p className={styles.sequenceText}>user authorization</p>
+            </div>
+          </div>
+          <div className={styles.sequenceMatrix}>
+            {sequence3.map((value, index) => (
+              <p
+                key={index}
+                className={classNames(
+                  styles.sequenceValue,
+                  buffer.includes(value) && styles.greenText
+                )}
+              >
+                {value}
+              </p>
+            ))}
+            <div className={styles.sequenceInfo}>
+              <Image
+                className={styles.sequenceImage}
+                width={20}
+                height={20}
+                alt=""
+                src={"./svg/netHack.svg"}
+              />
+              <p className={styles.sequenceText}>network access</p>
+            </div>
+          </div>
+          <div className={styles.sequenceMatrix}>
+            {sequence4.map((value, index) => (
+              <p
+                key={index}
+                className={classNames(
+                  styles.sequenceValue,
+                  buffer.includes(value) && styles.greenText
+                )}
+              >
+                {value}
+              </p>
+            ))}
+            <div className={styles.sequenceInfo}>
+              <Image
+                className={styles.sequenceImage}
+                width={20}
+                height={20}
+                alt=""
+                src={"./svg/loadDemon.svg"}
+              />
+              <p className={styles.sequenceText}>launch the daemon</p>
+            </div>
+          </div>
+          <div className={styles.sequenceMatrix}>
+            {sequence5.map((value, index) => (
+              <p
+                key={index}
+                className={classNames(
+                  styles.sequenceValue,
+                  buffer.includes(value) && styles.greenText
+                )}
+              >
+                {value}
+              </p>
+            ))}
+            <div className={styles.sequenceInfo}>
+              <Image
+                className={styles.sequenceImage}
+                width={20}
+                height={20}
+                alt=""
+                src={"./svg/rootAcess.svg"}
+              />
+              <p className={styles.sequenceText}>R00T ACCESS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <VideoLoader open={seconds === 0 ? false : true} />
+      {matchedSequences.length > 0 && (
+        <SuccessHackModal matchedSequences={matchedSequences} />
       )}
     </React.Fragment>
   );

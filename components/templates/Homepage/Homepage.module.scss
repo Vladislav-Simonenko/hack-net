@@ -66,7 +66,6 @@
 
         .matrixRow {
           @include flex-container(row, center, center);
-          gap: 20px;
 
           .matrixCell {
             text-align: center;
@@ -159,15 +158,27 @@
 
       .sequenceInfo {
         @include flex-container(row, center, center);
-        @include format-text($RobotoLight, 16px, 600, $white, 150%, left, 1px);
-        gap: 8px;
-        text-transform: capitalize;
-      }
 
-      .sequenceImage {
-        width: 40px;
-        height: 40px;
-        object-fit: cover;
+        gap: 8px;
+
+        .sequenceImage {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+        }
+
+        .sequenceText {
+          @include format-text(
+            $RobotoLight,
+            16px,
+            600,
+            $white,
+            150%,
+            left,
+            1px
+          );
+          text-transform: capitalize;
+        }
       }
 
       :last-child {
@@ -195,5 +206,23 @@
   }
   .rightSideHackBuffer {
     @include flex-container(row, center, center);
+  }
+  .sequenceText {
+    font-size: 12px !important;
+  }
+
+  .currentBufferValue {
+    font-size: 12px !important;
+  }
+
+  .leftSideHackTimer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px;
+  }
+
+  .sequenceHeaderText {
+    font-size: 14px !important;
   }
 }
