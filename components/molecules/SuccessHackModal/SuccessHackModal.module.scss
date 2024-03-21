@@ -1,7 +1,6 @@
 @import "assets/mixin/mixin.scss";
 @import "app/main.scss";
 @import "assets/variables/variables.scss";
-$colors: #00ff00, #66ff66, #99ff99, #ccffcc, #99ff99, #66ff66, #00ff00;
 
 .hackModalContainer {
   @include flex-container(column, flex-start, flex-start);
@@ -21,45 +20,13 @@ $colors: #00ff00, #66ff66, #99ff99, #ccffcc, #99ff99, #66ff66, #00ff00;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  .rainbowText {
-    font-size: 16px;
-    animation: rainbow 4s infinite;
-  }
-
   .hackModalTypes {
     @include flex-container(column, flex-start, flex-start);
     gap: 20px;
     margin-top: 24px;
-  }
-}
 
-.rainbowText {
-  animation: rainbow 4s infinite;
-}
-
-@keyframes rainbow {
-  0% {
-    color: nth($colors, 1);
-  }
-  14% {
-    color: nth($colors, 2);
-  }
-  28% {
-    color: nth($colors, 3);
-  }
-  42% {
-    color: nth($colors, 4);
-  }
-  56% {
-    color: nth($colors, 5);
-  }
-  70% {
-    color: nth($colors, 6);
-  }
-  84% {
-    color: nth($colors, 7);
-  }
-  100% {
-    color: nth($colors, 1);
+    .hackModalText {
+      @include flex-container(row, center, center);
+    }
   }
 }

@@ -1,4 +1,10 @@
 .container {
-  margin: 90px 0;
+  margin: 90px;
   flex: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 20px 0;
+  }
 }

@@ -81,13 +81,27 @@
     flex: 0 0 50%;
 
     .rightSideHackBuffer {
+      @include flex-container(column, flex-start, flex-start);
       padding: 8px 0 12px 0;
       border-top: 1px solid $mainYellowColor;
       border-bottom: 1px solid $mainYellowColor;
 
+      .rightSideHackBufferText {
+        @include format-text(
+          $RobotoLight,
+          16px,
+          600,
+          $mainYellowColor,
+          150%,
+          left,
+          2px
+        );
+        text-transform: uppercase;
+      }
       .currentBuffer {
         @include flex-container(row, flex-start, flex-start);
         gap: 8px;
+        margin-top: 8px;
         padding: 12px;
         border: 1px solid $mainYellowColor;
         width: fit-content;
@@ -204,9 +218,16 @@
   .hackContainer {
     @include flex-container(column, center, center);
   }
-  .rightSideHackBuffer {
-    @include flex-container(row, center, center);
+
+  .rightSideHackContainer {
+    padding: 0 8px;
   }
+
+  .rightSideHackBuffer {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
   .sequenceText {
     font-size: 12px !important;
   }
@@ -220,6 +241,11 @@
     flex-direction: column !important;
     align-items: center !important;
     gap: 8px;
+  }
+
+  .leftSideHackText {
+    font-size: 20px !important;
+    text-align: center !important;
   }
 
   .sequenceHeaderText {

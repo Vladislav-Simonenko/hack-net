@@ -6,7 +6,11 @@ import classNames from "classnames";
 import { SuccessVideoHack } from "@/components";
 
 interface ISuccessHackModal {
-  matchedSequences: { message: string; sequence: string[] }[];
+  matchedSequences: {
+    img: React.JSX.Element;
+    message: string;
+    sequence: string[];
+  }[];
 }
 
 export const SuccessHackModal: FC<ISuccessHackModal> = (props) => {
@@ -15,12 +19,13 @@ export const SuccessHackModal: FC<ISuccessHackModal> = (props) => {
     <>
       <Modal open>
         <div className={styles.hackModalContainer}>
-          <p className={classNames(styles.hackModalAccess, styles.rainbowText)}>
-            Access granted
-          </p>
           <div className={styles.hackModalTypes}>
             {matchedSequences.map((item) => {
-              return <p key={item.message}>{item.message}</p>;
+              return (
+                <p key={item.message} className={styles.hackModalText}>
+                  {item.message} {item.img}
+                </p>
+              );
             })}
           </div>
         </div>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Head from "next/head";
+import { MainContainer } from "@/components";
 
 import "/app/globals.scss";
-import { MainContainer } from "@/components";
 
 interface IRootLayout {
   children: React.ReactNode;
@@ -22,9 +22,7 @@ export default async function LocaleLayout({ children }: IRootLayout) {
         <meta name="format-detection" content="telephone=no" />
       </Head>
       <body>
-        {/* <Header /> */}
         <MainContainer>{children}</MainContainer>
-        {/* <Footer /> */}
       </body>
     </html>
   );

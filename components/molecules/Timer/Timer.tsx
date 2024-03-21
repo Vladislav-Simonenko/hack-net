@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Countdown, { CountdownRenderProps } from "react-countdown";
 import { HackedModal } from "@/components";
 
@@ -8,10 +8,13 @@ import classNames from "classnames";
 
 interface ITimerProps {
   endDate: number;
+  matchedSequences: boolean;
+  timeOver: boolean;
+  fullBuffer: boolean;
 }
 
 export const Timer: FC<ITimerProps> = (props) => {
-  const { endDate } = props;
+  const { endDate, matchedSequences, timeOver, fullBuffer } = props;
   const Completionist = () => <HackedModal />;
 
   const renderer = ({
@@ -19,7 +22,9 @@ export const Timer: FC<ITimerProps> = (props) => {
     milliseconds,
     completed,
   }: CountdownRenderProps) => {
-    if (completed) {
+    if (timeOver && matchedSequences) {
+      return <Completionist />;
+    } else if (matchedSequences && fullBuffer) {
       return <Completionist />;
     } else {
       return (

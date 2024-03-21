@@ -3,6 +3,17 @@ $RobotoLight: "Roboto-Light";
 $RobotoMedium: "Roboto-Medium";
 $RobotoRegular: "Roboto-Regular";
 
+$Cyberpunk: "Cyberpunk";
+
+//CYBER
+@font-face {
+  font-family: "Cyberpunk";
+  font-display: block;
+  src: local("Cyberpunk"),
+    url("../public/fonts/cyber/Cyberpunk.ttf") format("truetype");
+}
+
+//ROBOTO
 @font-face {
   font-family: "Roboto-Bold";
   font-display: block;
